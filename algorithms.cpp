@@ -22,7 +22,7 @@ int naive_implementation_regex(const std::string& text, const std::string& sampl
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = naive_implementation(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos + (sample.size() - inds[i]) < text.size()) {
+        if (pos - inds[i] >= 0) {
             split[pos - inds[i]]++;
         }
     }
@@ -78,7 +78,7 @@ int kmp_with_opt_regex(const std::string& text, const std::string& sample,
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = kmp_with_opt(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
+        if (pos - inds[i] >= 0) {
             split[pos - inds[i]]++;
         }
     }
@@ -128,7 +128,7 @@ int kmp_without_opt_regex(const std::string& text, const std::string& sample,
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = kmp_without_opt(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
+        if (pos - inds[i] >= 0) {
             split[pos - inds[i]]++;
         }
     }
@@ -176,7 +176,7 @@ int boyer_moore_regex(const std::string& text, const std::string& sample,
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = boyer_moore(text, ss[i]);
-        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
+        if (pos - inds[i] >= 0) {
             split[pos - inds[i]]++;
         }
     }
