@@ -18,17 +18,17 @@ int naive_implementation(const std::string& text, const std::string& sample) {
 
 int naive_implementation_regex(const std::string& text, const std::string& sample,
                        const std::vector<int>& inds, const std::vector<std::string>& ss) {
-    std::vector<int> split(text.size(), 0);
+    std::vector<int> split(text.size());
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = naive_implementation(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos - inds[i] < text.size()) {
+        if (pos - inds[i] >= 0 && pos + (sample.size() - inds[i]) < text.size()) {
             split[pos - inds[i]]++;
         }
     }
     int ans = -1;
     for (size_t i = 0; i < text.size(); ++i) {
-        if (split[i] == sample.size()) {
+        if (split[i] == ss.size()) {
             ans = i;
         }
     }
@@ -74,17 +74,17 @@ int kmp_with_opt(const std::string& text, const std::string& sample) {
 
 int kmp_with_opt_regex(const std::string& text, const std::string& sample,
                        const std::vector<int>& inds, const std::vector<std::string>& ss) {
-    std::vector<int> split(text.size(), 0);
+    std::vector<int> split(text.size());
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = kmp_with_opt(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos - inds[i] < text.size()) {
+        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
             split[pos - inds[i]]++;
         }
     }
     int ans = -1;
     for (size_t i = 0; i < text.size(); ++i) {
-        if (split[i] == sample.size()) {
+        if (split[i] == ss.size()) {
             ans = i;
         }
     }
@@ -124,17 +124,17 @@ int kmp_without_opt(const std::string& text, const std::string& sample) {
 
 int kmp_without_opt_regex(const std::string& text, const std::string& sample,
                           const std::vector<int>& inds, const std::vector<std::string>& ss) {
-    std::vector<int> split(text.size(), 0);
+    std::vector<int> split(text.size());
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = kmp_without_opt(text,ss[i]);
-        if (pos - inds[i] >= 0 && pos - inds[i] < text.size()) {
+        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
             split[pos - inds[i]]++;
         }
     }
     int ans = -1;
     for (size_t i = 0; i < text.size(); ++i) {
-        if (split[i] == sample.size()) {
+        if (split[i] == ss.size()) {
             ans = i;
         }
     }
@@ -172,17 +172,17 @@ int boyer_moore(const std::string& text, const std::string& sample) {
 
 int boyer_moore_regex(const std::string& text, const std::string& sample,
                       const std::vector<int>& inds, const std::vector<std::string>& ss) {
-    std::vector<int> split(text.size(), 0);
+    std::vector<int> split(text.size());
     int pos;
     for (size_t i = 0; i < ss.size(); ++i) {
         pos = boyer_moore(text, ss[i]);
-        if (pos - inds[i] >= 0 && pos - inds[i] < text.size()) {
+        if (pos - inds[i] >= 0 && pos + inds[i] < text.size()) {
             split[pos - inds[i]]++;
         }
     }
     int ans = -1;
     for (size_t i = 0; i < text.size(); ++i) {
-        if (split[i] == sample.size()) {
+        if (split[i] == ss.size()) {
             ans = i;
         }
     }
